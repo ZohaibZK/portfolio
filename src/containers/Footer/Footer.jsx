@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import routes from "../../config/routes";
 
 const Footer = () => {
     return (
@@ -7,9 +9,9 @@ const Footer = () => {
                 <div className="footer__top">
                     <div className="row">
                         <div className="col-lg-6 col-md-6">
-                            <div className="footer__top__logo">
+                            {/* <div className="footer__top__logo">
                                 Back to Top
-                            </div>
+                            </div> */}
                         </div>
                         <div className="col-lg-6 col-md-6">
                             <div className="footer__top__social">
@@ -29,27 +31,27 @@ const Footer = () => {
                             <div className="footer__option__item">
                                 <h5>About me</h5>
                                 <p>I am a computer engineer from NUST. I currently carry 4+ years of experience in web development. Click the button below to read more.</p>
-                                <a href="#" className="read__more">Read more <span className="arrow_right"></span></a>
+                                <Link to={routes.aboutMe} className="read__more">Read more <span className="arrow_right"></span></Link>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-3">
                             <div className="footer__option__item">
                                 <h5>My Services</h5>
                                 <p>I provide different web services including frontend development, backend development and deployments and much more.</p>
-                                <a href="#" className="read__more">View all services <span className="arrow_right"></span></a>
+                                <Link to={routes.myServices} className="read__more">View all services <span className="arrow_right"></span></Link>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-3">
                             <div className="footer__option__item">
                                 <h5>My Projects</h5>
-                                <p>I have 20+ live projects running and I have completed 25+ projects with 10+ happy clients. Click below view my work</p>
-                                <a href="#" className="read__more">View all projects <span className="arrow_right"></span></a>
+                                <p>I have 20+ live projects running and I have completed 25+ projects with 10+ happy clients. Click below view my work.</p>
+                                <Link to={routes.myProjects} className="read__more">View all projects <span className="arrow_right"></span></Link>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-12">
                             <div className="footer__option__item">
                                 <h5>Contact me</h5>
-                                <a href='#' className="primary-btn">Click here</a>
+                                <Link to={routes.contactMe} className="primary-btn">Click here</Link>
                             </div>
                         </div>
                     </div>

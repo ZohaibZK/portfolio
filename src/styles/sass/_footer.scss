@@ -65,6 +65,10 @@
       font-size: 16px;
       color: $white-color;
 
+      &:hover {
+        color: #00bfe7 !important;
+      }
+
       span {
           font-size: 16px;
           color: $white-color;

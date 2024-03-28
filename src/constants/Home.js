@@ -6,10 +6,10 @@ import countsIcon1 from '../assets/img/icons/ci-1.png';
 import countsIcon2 from '../assets/img/icons/ci-2.png';
 import countsIcon3 from '../assets/img/icons/ci-3.png';
 import countsIcon4 from '../assets/img/icons/ci-4.png';
-import projectPics1 from '../assets/img/team/team-1.jpg';
-import projectPics2 from '../assets/img/team/team-2.jpg';
-import projectPics3 from '../assets/img/team/team-3.jpg';
-import projectPics4 from '../assets/img/team/team-4.jpg';
+import projectPics1 from '../assets/img/team/midl.png';
+import projectPics2 from '../assets/img/team/trolly.png';
+import projectPics3 from '../assets/img/team/chatty.png';
+import projectPics4 from '../assets/img/team/bill-matrix.png';
 
 
 export const MyHomeServices = [
@@ -50,9 +50,9 @@ export const MyBestProjectsData = [
         id: '1', title: 'Trolly', linkName: 'trolly.ai', link: 'https://trolly.ai/', icon: projectPics2, class: 'team__item--second',
     },
     {
-        id: '2', title: 'Chatty', linkName: 'chatty.to', link: 'https://chatty.to/', icon: projectPics3, class: 'team__item--third',
+        id: '3', title: 'Bill Matrix', linkName: 'billmatrix.app', link: 'https://billmatrix.app/', icon: projectPics4, class: 'team__item--four',
     },
     {
-        id: '3', title: 'Bill Matrix', linkName: 'billmatrix.app', link: 'https://billmatrix.app/', icon: projectPics4, class: 'team__item--four',
+        id: '2', title: 'Chatty', linkName: 'chatty.to', link: 'https://chatty.to/', icon: projectPics3, class: 'team__item--third',
     },
 ]

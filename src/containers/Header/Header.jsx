@@ -8,12 +8,12 @@ const Header = () => {
         <header className="header">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-2">
+                    {/* <div className="col-lg-2">
                         <div className="header__logo">
-                            {/* <a href="./index.html"><img src="img/logo.png" alt="" /></a> */}
+                            <a href="./index.html"><img src="img/logo.png" alt="" /></a>
                         </div>
-                    </div>
-                    <div className="col-lg-10">
+                    </div> */}
+                    <div className="col-lg-12">
                         <div className="header__nav__option">
                             <nav className="header__nav__menu mobile-menu">
                                 <ul>

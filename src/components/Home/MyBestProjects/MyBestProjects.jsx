@@ -1,5 +1,7 @@
 import React from "react";
 import { MyBestProjectsData } from "../../../constants/Home";
+import { Link } from "react-router-dom";
+import routes from "../../../config/routes";
 
 const MyBestProjects = () => {
     return (
@@ -17,12 +19,18 @@ const MyBestProjects = () => {
                     {
                         MyBestProjectsData?.map((project, index) => {
                             return (
-                                <div className="col-lg-3 col-md-6 col-sm-6 p-0">
+                                <div className="col-lg-3 col-md-6 col-sm-6 p-0" key={project.id}>
                                     <div className={`team__item ${project.class} set-bg`}>
-                                        <img src={project.icon} alt="" />
+                                        <img src={project.icon} alt={project.title} />
                                         <div className="team__item__text">
                                             <h4>{project.title}</h4>
-                                            <a href={project.link} style={{ color: '#8742c0' }} target="_blank" rel="noreferrer">{project.linkName}</a>
+                                            <Link href={project.link}
+                                                style={{ color: '#8742c0' }}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                {project.linkName}
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +39,7 @@ const MyBestProjects = () => {
                     }
                     <div className="col-lg-12 p-0">
                         <div className="team__btn">
-                            <a href="#" className="primary-btn">View All Projects</a>
+                            <Link to={routes.myProjects} className="primary-btn">View All Projects</Link>
                         </div>
                     </div>
                 </div>

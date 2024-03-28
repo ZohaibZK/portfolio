@@ -1,5 +1,7 @@
 import React from "react";
 import { MyHomeServices } from "../../../constants/Home";
+import { Link } from "react-router-dom";
+import routes from "../../../config/routes";
 
 const MyServicesHome = () => {
     return (
@@ -17,7 +19,7 @@ const MyServicesHome = () => {
                             <p>
                                 Whether you're a business looking to establish your online presence or an entrepreneur with a game-changing idea, let's work together to turn your vision into reality—no tech jargon required!
                             </p>
-                            <a href="#" className="primary-btn">View all services</a>
+                            <Link to={routes.myServices} className="primary-btn">View all services</Link>
                         </div>
                     </div>
                     <div className="col-lg-8">
@@ -25,7 +27,7 @@ const MyServicesHome = () => {
                             {
                                 MyHomeServices?.map((service, index) => {
                                     return (
-                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                        <div className="col-lg-6 col-md-6 col-sm-6" key={service.id}>
                                             <div className="services__item">
                                                 <div className="services__item__icon">
                                                     <img src={service.icon} alt="" style={{ filter: 'invert(1)' }} width={40} />

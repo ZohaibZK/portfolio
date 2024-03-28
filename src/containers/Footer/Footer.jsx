@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import routes from "../../config/routes";
+import { FooterItems } from "../../constants/Footer";
 
 const Footer = () => {
     return (
@@ -27,33 +28,25 @@ const Footer = () => {
                 </div>
                 <div className="footer__option">
                     <div className="row">
-                        <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="footer__option__item">
-                                <h5>About me</h5>
-                                <p>I am a computer engineer from NUST. I currently carry 4+ years of experience in web development. Click the button below to read more.</p>
-                                <Link to={routes.aboutMe} className="read__more">Read more <span className="arrow_right"></span></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-3">
-                            <div className="footer__option__item">
-                                <h5>My Services</h5>
-                                <p>I provide different web services including frontend development, backend development and deployments and much more.</p>
-                                <Link to={routes.myServices} className="read__more">View all services <span className="arrow_right"></span></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-3">
-                            <div className="footer__option__item">
-                                <h5>My Projects</h5>
-                                <p>I have 20+ live projects running and I have completed 25+ projects with 10+ happy clients. Click below view my work.</p>
-                                <Link to={routes.myProjects} className="read__more">View all projects <span className="arrow_right"></span></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-12">
-                            <div className="footer__option__item">
-                                <h5>Contact me</h5>
-                                <Link to={routes.contactMe} className="primary-btn">Click here</Link>
-                            </div>
-                        </div>
+                        {
+                            FooterItems.map((item, index) => {
+                                return (
+                                    <div className="col-lg-3 col-md-6 col-sm-6" key={item.id}>
+                                        <div className="footer__option__item">
+                                            <h5>{item.name}</h5>
+                                            <p>{item.description}</p>
+                                            <Link to={item.route}
+                                                className={`${index === 3 ? 'primary-btn' : "read__more"}`}>{item.linkName}
+                                                {
+                                                    index !== 3 &&
+                                                    <span className="arrow_right" />
+                                                }
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 {/* <div className="footer__copyright">

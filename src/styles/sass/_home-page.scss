@@ -1,9 +1,7 @@
 /*---------------------
   Hero
 -----------------------*/
-.hero {
-  
-}
+.hero {}
 
 .hero__slider {
 
@@ -78,6 +76,7 @@
 }
 
 .hero__item {
+  position: relative;
   background-image: url('../../assets/img/hero/hero-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -86,7 +85,19 @@
   padding-top: 255px;
 }
 
+.hero__item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .hero__text {
+  position: relative;
+  z-index: 1;
 
   span {
     color: $white-color;
@@ -135,7 +146,7 @@
 }
 
 .work__item {
-  height: 311px!important;
+  height: 311px !important;
   width: calc(16.67% - 10px);
   margin-right: 10px;
   margin-bottom: 10px;
@@ -154,13 +165,13 @@
   }
 
   &.large__item {
-    height: 633px!important;
+    height: 633px !important;
     width: calc(33.33% - 10px);
   }
 
   &.wide__item {
     width: calc(33.33% - 10px);
-    height: 311px!important;
+    height: 311px !important;
   }
 
   .play-btn {
@@ -420,10 +431,10 @@
   &.latest__item {
     margin-bottom: 0;
 
-      &:hover {
-        border: 1px solid #222222!important;
-        background: url(../../assets/img/blog/blog-1.jpg);
-        background-size: cover;
+    &:hover {
+      border: 1px solid #222222 !important;
+      background: url(../../assets/img/blog/blog-1.jpg);
+      background-size: cover;
     }
   }
 }

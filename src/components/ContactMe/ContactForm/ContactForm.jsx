@@ -26,18 +26,18 @@ const ContactForm = () => {
     }
 
     return (
-        <section class="contact spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="contact__form">
+        <section className="contact spad">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12 col-md-12">
+                        <div className="contact__form">
                             <h3>Get in touch</h3>
                             <form onSubmit={handleSubmit}>
                                 <input name="name" value={values.name} onChange={handleChange} type="text" placeholder="Name" />
                                 <input name="email" value={values.email} onChange={handleChange} type="text" placeholder="Email" />
                                 <input name="subject" value={values.subject} onChange={handleChange} type="text" placeholder="Website" />
                                 <textarea name="message" value={values.message} onChange={handleChange} placeholder="Message"></textarea>
-                                <button type="submit" class="site-btn">Send Message</button>
+                                <button type="submit" className="site-btn">Send Message</button>
                             </form>
                         </div>
                     </div>

@@ -1,9 +1,8 @@
 import React from "react";
-import { MyBestProjectsData } from "../../../constants/Home";
 import { Link } from "react-router-dom";
-import routes from "../../../config/routes";
+import { MyProjectsData } from "../../../constants/MyProjects";
 
-const MyBestProjects = () => {
+const ProjectsListing = () => {
     return (
         <section className="team spad set-bg">
             <div className="container">
@@ -17,10 +16,10 @@ const MyBestProjects = () => {
                 </div>
                 <div className="row">
                     {
-                        MyBestProjectsData?.map((project, index) => {
+                        MyProjectsData?.map((project, index) => {
                             return (
                                 <div className="col-lg-3 col-md-6 col-sm-6 p-0" key={project.id}>
-                                    <div className={`team__item ${project.class} set-bg`} style={{ marginLeft: '10px', marginRight: '10px' }}>
+                                    <div className={`team__item set-bg`} style={{ marginLeft: '10px', marginRight: '10px' }}>
                                         <img src={project.icon} alt={project.title} />
                                         <div className="team__item__text">
                                             <h4>{project.title}</h4>
@@ -37,15 +36,10 @@ const MyBestProjects = () => {
                             )
                         })
                     }
-                    <div className="col-lg-12 p-0">
-                        <div className="team__btn">
-                            <Link to={routes.myProjects} className="primary-btn">View All Projects</Link>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
     )
 }
 
-export default MyBestProjects;
+export default ProjectsListing;

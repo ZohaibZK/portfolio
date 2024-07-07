@@ -330,7 +330,7 @@
   Team
 -----------------------*/
 .team {
-  padding-bottom: 90px;
+  padding-bottom: 70px;
 }
 
 .section-title.team__title {
@@ -341,6 +341,10 @@
   height: 390px;
   position: relative;
   overflow: hidden;
+
+  @media only screen and (max-width: 575px) {
+    width: max-content !important;
+  }
 
   &:hover {
 
@@ -378,7 +382,8 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background: url(../../assets/img/team/team-hover.png);
+    background-color: black;
+    // background: url(../../assets/img/team/team-hover.png);
     content: "";
     z-index: -1;
   }

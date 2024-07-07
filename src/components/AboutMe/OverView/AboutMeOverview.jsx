@@ -6,10 +6,10 @@ const AboutMeOverview = () => {
         <section className="about-description-section">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-12" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
-                        <h2 style={{ color: '#00bfe7', fontWeight: '700', textAlign: 'center', marginBottom: '15px' }}>About Me</h2>
+                    <div className="col-md-12" style={{ paddingBottom: '40px' }}>
+                        {/* <h2 style={{ color: '#00bfe7', fontWeight: '700', textAlign: 'center', marginBottom: '15px' }}>About Me</h2> */}
                         <p className="about-description-paragraph">
-                            I am Muhammad Zohaib Khalid, a Computer Engineer from NUST. I carry 3+ years of experience for frontend development. I have worked on many projects ranging from portfolio websites to web3 projects including AI projects as well. I am currently working as a Team Lead and Frontend Developer.
+                            I am Muhammad Zohaib Khalid, a Computer Engineer from NUST. I carry 4+ years of experience for frontend development. I have worked on many projects ranging from portfolio websites to web3 projects including AI projects as well. I am currently working as a Team Lead and Frontend Developer.
                         </p>
                     </div>
                     <div className="col-md-12" style={{ paddingBottom: '40px' }}>

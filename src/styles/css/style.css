@@ -781,7 +781,7 @@ ol {
   Team
 -----------------------*/
 .team {
-  padding-bottom: 90px;
+  padding-bottom: 70px;
 }
 
 .section-title.team__title {
@@ -830,7 +830,8 @@ ol {
   top: 0;
   height: 100%;
   width: 100%;
-  background: url(/src/assets/img/team/team-hover.png);
+  background-color: black;
+  /* background: url(/src/assets/img/team/team-hover.png); */
   content: "";
   z-index: -1;
 }
@@ -2026,7 +2027,7 @@ ol {
 }
 
 /* Tablet Device = 768px */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 767px) and (max-width: 992px) {
   .hero__slider.owl-carousel .owl-dots {
     max-width: 690px !important;
   }
@@ -2071,16 +2072,20 @@ ol {
     padding-bottom: 70px;
   }
 
+  .team__item {
+    max-width: max-content;
+  }
+
   .team__item.team__item--second {
     margin-top: 0;
   }
 
   .team__item.team__item--third {
-    margin-top: 0;
+    margin-top: 30px;
   }
 
   .team__item.team__item--four {
-    margin-top: 0;
+    margin-top: 30px;
   }
 
   .team__btn {
@@ -2322,6 +2327,9 @@ ol {
 
   .team .p-0 {
     padding: 0 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .about__pic__item {
@@ -2377,4 +2385,8 @@ ol {
 .about-description-section {
   background: #0a0119;
   padding-top: 100px;
+}
+
+.about-description-paragraph {
+  text-align: center;
 }

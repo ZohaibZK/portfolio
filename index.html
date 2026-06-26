@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Frontend Architect & Full Stack Engineer specializing in React, Next.js, TypeScript, Node.js and scalable enterprise applications.">
+  <meta name="keywords"
+    content="freelance developer, fullstack developer, portfolio, Tailwind CSS, React.js, Node.js, Next.js, Nest.js, AWS, Cloud">
+  <meta name="author" content="Zohaib Khalid">
+  <meta property="og:title" content="Zohaib Khalid | Frontend Architect & Full Stack Engineer">
+  <meta property="og:description"
+    content="Frontend Architect & Full Stack Engineer specializing in React, Next.js, TypeScript, Node.js and scalable enterprise applications.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zohaib.dev">
+  <title>Zohaib Khalid | Frontend Architect & Full Stack Engineer</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { display: ['PT Sans', 'sans-serif'], body: ['DM Sans', 'sans-serif'] },
+          colors: { accent: '#5a4ab6', 'accent-light': '#FF8F5C' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      font-family: 'DM Sans', sans-serif
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'PT Sans', sans-serif
+    }
+
+    body {
+      transition: background-color .3s, color .3s
+    }
+
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #5a4ab6;
+      border-radius: 99px
+    }
+
+    /* reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .6s cubic-bezier(.4, 0, .2, 1), transform .6s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .08s
+    }
+
+    .d2 {
+      transition-delay: .16s
+    }
+
+    .d3 {
+      transition-delay: .24s
+    }
+
+    .d4 {
+      transition-delay: .32s
+    }
+
+    /* nav underline animation */
+    .nl {
+      position: relative
+    }
+
+    .nl::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: currentColor;
+      transition: width .22s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .nl:hover::after,
+    .nl.on::after {
+      width: 100%
+    }
+
+    .nl.on {
+      font-weight: 500
+    }
+
+    /* shimmer button */
+    .shimmer {
+      position: relative;
+      overflow: hidden
+    }
+
+    .shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255, 255, 255, .18);
+      transform: skewX(-20deg);
+      transition: left .4s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .shimmer:hover::after {
+      left: 160%
+    }
+
+    /* photo frames */
+    .pf {
+      overflow: hidden;
+      background: #d4d4d8
+    }
+
+    .pf img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    /* card hover */
+    .card-h {
+      transition: transform .28s cubic-bezier(.4, 0, .2, 1), border-color .18s
+    }
+
+    .card-h:hover {
+      transform: translateY(-4px)
+    }
+
+    /* skill tag */
+    .stag {
+      transition: border-color .18s
+    }
+
+    [x-cloak] {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+  <!-- ═══ NAV ═══ -->
+  <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+
+      <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10">
+        <span class="text-zinc-900 dark:text-white">zoh</span><span class="text-accent">aib</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
+        <li><a href="#expertise"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='expertise'?'on !text-zinc-900 dark:!text-white':''">Expertise</a></li>
+        <li><a href="#work"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='work'?'on !text-zinc-900 dark:!text-white':''">Work</a></li>
+        <li><a href="#about"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">About</a></li>
+        <li><a href="#experience"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='experience'?'on !text-zinc-900 dark:!text-white':''">Experience</a></li>
+        <li><a href="#achievements"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='achievements'?'on !text-zinc-900 dark:!text-white':''">Achievements</a></li>
+        <li><a href="#contact"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <!-- dark toggle -->
+        <button @click="dark=!dark"
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+          :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+          <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+        </button>
+        <!-- hire me -->
+        <a href="#contact"
+          class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-white text-sm font-medium px-5 py-2 rounded-full transition-colors">
+          Hire me <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <!-- hamburger -->
+        <button @click="mm=!mm"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+          :aria-expanded="mm" aria-label="Toggle menu">
+          <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- mobile menu -->
+    <div x-show="mm" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
+        <li><a href="#expertise" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Expertise</a></li>
+        <li><a href="#work" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Work</a></li>
+        <li><a href="#about" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">About</a></li>
+        <li><a href="#experience" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Experience</a></li>
+        <li><a href="#achievements" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Achievements</a></li>
+        <li><a href="#contact" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Contact</a></li>
+        <li class="pt-2 border-t border-zinc-100 dark:border-zinc-900">
+          <a href="#contact" @click="mm=false"
+            class="inline-flex shimmer bg-accent text-white font-medium text-sm px-5 py-2.5 rounded-full">Hire me →</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+      <div
+        class="absolute bottom-1/4 left-0 w-64 h-64 bg-zinc-200/50 dark:bg-zinc-800/30 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+          <div>
+            <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">Available for work</p>
+            <h1
+              class="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">
+              Hi, I'm <span class="text-accent">Zohaib Khalid</span>
+            </h1>
+            <p
+              class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
+              <strong class="font-medium text-zinc-700 dark:text-zinc-300">Frontend Architect & Full Stack
+                Engineer</strong>. Building
+              enterprise-grade applications using React, Next.js,
+              TypeScript and Node.js. Specialized in scalable frontend
+              architecture, micro-frontends, LMS, CMS, HRM and E-commerce platforms.
+            </p>
+            <div class="reveal d3 flex flex-wrap gap-4">
+              <a href="#work"
+                class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">
+                View my work
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <a href="#contact"
+                class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-sm">Get
+                in touch</a>
+            </div>
+            <div class="reveal d4 flex gap-8 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">30+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Projects done</p>
+              </div>
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">10+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Engineers Led</p>
+              </div>
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">6y+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Experience</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal d2 flex justify-center md:justify-end">
+            <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+              <div class="pf w-full h-full rounded-3xl bg-transparent">
+                <img src="1.png" alt="Zohaib Khalid — Frontend Developer" loading="eager">
+              </div>
+              <div
+                class="absolute -bottom-4 -left-4 bg-accent text-white font-display font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg">
+                Open to projects</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Expertise ═══ -->
+    <section id="expertise" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-14">
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">What I do</p>
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Expertise</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-purple-100 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+              <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Full Stack Development</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Backend APIs and business applications
+              using Node.js, Express, NestJS, MongoDB and PostgreSQL.</p>
+          </article>
+
+          <article
+            class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-xl mb-6 group-hover:bg-accent/20 transition-colors">
+              <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3">Enterprise Frontend Development</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed">Scalable React and Next.js applications with
+              TypeScript, Redux Toolkit and modern architecture.</p>
+          </article>
+
+          <article
+            class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div
+              class="w-12 h-12 flex items-center justify-center bg-purple-100 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+              <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+              </svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">Technical Leadership</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">Frontend architecture, code reviews,
+              mentoring, team leadership and engineering best practices.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ENTERPRISE PRODUCTS & PLATFORMS ═══ -->
+    <section id="work" class="py-24">
+
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+
+          <div>
+
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+              Enterprise Products & Platforms
+            </p>
+
+            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+              Building Scalable Systems Across Industries
+            </h2>
+
+            <p class="reveal d2 mt-4 text-zinc-500 dark:text-zinc-400 max-w-2xl">
+              Contributing to enterprise-grade healthcare intelligence, AI-powered
+              customer engagement platforms, and large-scale education technology
+              ecosystems.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <!-- NORSTELLA -->
+
+          <article
+            class="card-h reveal d1 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent md:row-span-2">
+
+            <div
+              class="w-full h-64 md:h-80 flex items-center justify-center bg-gradient-to-br from-cyan-500/20 via-purple-1000/20 to-indigo-500/20">
+
+              <h3 class="font-display text-5xl font-bold text-zinc-900 dark:text-white">
+                NORSTELLA
+              </h3>
+
+            </div>
+
+            <div class="p-7">
+
+              <div class="flex flex-wrap gap-2 mb-4">
+
+                <span
+                  class="text-xs bg-purple-100 dark:bg-zinc-800 text-accent border border-purple-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                  Healthcare Intelligence
+                </span>
+
+                <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                  Enterprise Analytics
+                </span>
+
+                <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                  Financial Forecasting
+                </span>
+
+              </div>
+
+              <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white mb-3">
+                Norstella — Healthcare Intelligence Platform
+              </h3>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Contributed to enterprise-grade healthcare intelligence products
+                used by pharmaceutical and healthcare organizations for financial
+                analysis, forecasting, reporting and commercial decision making.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Developed Historical Financials (HF), enabling users to analyze
+                multi-year financial datasets through advanced visualizations and
+                FNCode-based reporting systems.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Built Hierarchical Product Sales (HPS) features supporting
+                region-based actuals, estimates and revenue analytics while
+                improving business visibility and reporting accuracy.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Implemented event integration workflows spanning Drug, Trial and
+                Organization master data domains, enabling structured event
+                association across complex healthcare datasets.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">
+                Collaborated closely with data science teams on forecasting systems,
+                conducted code reviews, participated in technical hiring and
+                mentored engineers while contributing to large-scale enterprise
+                platforms.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-5">
+
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  Senior Software Engineer
+                </span>
+
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  Healthcare Analytics
+                </span>
+
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  Financial Forecasting
+                </span>
+
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  Data Visualization
+                </span>
+
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  Enterprise Systems
+                </span>
+
+              </div>
+
+              <a href="https://www.norstella.com" target="_blank"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-white nl">
+                Visit Platform →
+              </a>
+
+            </div>
+
+          </article>
+
+          <!-- FYNCALL -->
+
+          <article
+            class="card-h reveal d2 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+            <div
+              class="w-full h-48 flex items-center justify-center bg-gradient-to-br from-emerald-500/20 via-green-500/20 to-teal-500/20">
+
+              <h3 class="font-display text-3xl font-bold text-zinc-900 dark:text-white">
+                FYNCALL
+              </h3>
+
+            </div>
+
+            <div class="p-6">
+
+              <div class="flex flex-wrap gap-2 mb-3">
+
+                <span
+                  class="text-xs bg-purple-100 dark:bg-zinc-800 text-accent border border-purple-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                  AI Platform
+                </span>
+
+                <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                  Customer Support
+                </span>
+
+              </div>
+
+              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-2">
+                FynCall — AI Communication Platform
+              </h3>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Led frontend development of an AI-powered customer engagement
+                platform supporting calls, chat, email and WhatsApp automation.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Built administration portals, RBAC systems, knowledge-base
+                management and integrations with GPT, Gemini and custom LLMs,
+                enabling organizations to deploy AI agents for automated support.
+              </p>
+
+              <a href="https://app.fyncall.com" target="_blank"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-white nl">
+                Visit Platform →
+              </a>
+
+            </div>
+
+          </article>
+
+          <!-- URQA -->
+
+          <article
+            class="card-h reveal d3 group rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+            <div
+              class="w-full h-48 flex items-center justify-center bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-purple-1000/20">
+
+              <h3 class="font-display text-3xl font-bold text-zinc-900 dark:text-white">
+                URQA
+              </h3>
+
+            </div>
+
+            <div class="p-6">
+
+              <div class="flex flex-wrap gap-2 mb-3">
+
+                <span
+                  class="text-xs bg-purple-100 dark:bg-zinc-800 text-accent border border-purple-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                  EdTech
+                </span>
+
+                <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                  Multi-Tenant
+                </span>
+
+              </div>
+
+              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-2">
+                URQA — Education Ecosystem
+              </h3>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Led development of a multi-tenant LMS, CMS, HRM and E-Commerce
+                platform serving educational institutions through customizable
+                subdomain-based deployments.
+              </p>
+
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                Architected a Micro Frontend ecosystem, managed a team of
+                10+ engineers and delivered interactive learning experiences,
+                onboarding workflows and advanced role management systems.
+              </p>
+
+              <a href="https://urqa.com" target="_blank"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-white nl">
+                Visit Platform →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+          <div class="reveal order-2 md:order-1">
+            <div class="pf w-full aspect-square max-w-sm mx-auto rounded-3xl bg-transparent">
+              <img src="1.png" alt="Zohaib Khalid" loading="lazy">
+            </div>
+          </div>
+
+          <div class="order-1 md:order-2">
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">About me</p>
+            <h2
+              class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">
+              A bit about<br>who I am</h2>
+            <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+              I'm Zohaib Khalid, a Senior Frontend Engineer and Full Stack Developer
+              with 6+ years of experience building enterprise applications.
+
+              I've led teams of engineers and worked on large-scale products
+              including Learning Management Systems (LMS), Content Management Systems (CMS),
+              Human Resource Management platforms (HRM), and E-commerce solutions.
+
+              My focus is creating scalable frontend architectures using React,
+              Next.js, TypeScript and modern engineering practices.
+            </p>
+            <p class="reveal d3 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+              I enjoy solving complex product challenges, mentoring developers,
+              and designing maintainable systems that can scale with business growth.
+            </p>
+            <div class="reveal d4">
+              <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Stack &amp;
+                tools</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">React
+                  Js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Next
+                  Js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">TypeScript</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Javascript</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Redux
+                  Toolkit</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Zustand</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Node
+                  Js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Nest
+                  Js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Express
+                  Js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">MongoDB</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">PostgreSQL</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Docker</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">AWS</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">GitHub
+                  Actions</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Micro
+                  Frontend Architecture</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Module
+                  Federation</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ EXPERIENCE ═══ -->
+    <section id="experience" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="mb-14">
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+            Career Journey
+          </p>
+
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+            Career Timeline
+          </h2>
+
+          <p class="reveal d2 mt-4 text-zinc-500 dark:text-zinc-400 max-w-2xl">
+            Over 6 years of experience building enterprise healthcare platforms,
+            AI-powered products, blockchain ecosystems, and large-scale SaaS
+            applications while leading engineering teams and frontend architecture initiatives.
+          </p>
+        </div>
+
+        <div class="relative">
+
+          <div class="absolute left-4 top-0 bottom-8 w-px bg-zinc-200 dark:bg-zinc-800"></div>
+
+          <!-- INNOVATIX -->
+          <div class="reveal d1 relative pl-14 pb-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-accent border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-purple-200 dark:border-zinc-700">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Senior Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    Innovatix (Norstella)
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  Mar 2025 — Present
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Building enterprise healthcare intelligence products used by global
+                pharmaceutical organizations. Developed Historical Financials (HF),
+                Hierarchical Product Sales (HPS), forecasting systems and event
+                integration workflows spanning Drug, Trial and Organization domains.
+                Collaborate closely with data science teams while conducting code
+                reviews, mentoring engineers and contributing to technical hiring.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">React</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">TypeScript</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Healthcare Analytics</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Forecasting</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Enterprise Systems</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BUILDERSON GROUP -->
+          <div class="reveal d2 relative pl-14 pb-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-zinc-300 dark:bg-zinc-700 border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Senior Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    Builderson Group (FynCall)
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  2024 — 2025
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Led frontend development of FynCall, an AI-powered customer engagement
+                platform enabling organizations to automate support through calls,
+                email, chat and WhatsApp. Built administration portals, RBAC systems,
+                knowledge-base management, GPT/Gemini integrations and custom AI-agent
+                workflows while coordinating with AI and backend teams.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">React</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Vite</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">GPT</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Gemini</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">AI Agents</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ABIZSOL -->
+          <div class="reveal d3 relative pl-14 pb-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-zinc-300 dark:bg-zinc-700 border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Senior Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    Abizsol (URQA)
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  2024 — 2025
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Led development of URQA, a multi-tenant LMS, CMS, HRM and
+                E-Commerce ecosystem. Architected a Micro Frontend platform,
+                implemented subdomain-based multi-tenancy and managed a team of
+                10+ engineers while delivering scalable learning experiences for
+                organizations, teachers and students.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Micro Frontends</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Module Federation</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Redux Toolkit</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Team Leadership</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">LMS</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- VILLAEX -->
+          <div class="reveal d4 relative pl-14 pb-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-zinc-300 dark:bg-zinc-700 border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Mid-Level Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    Villaex Technologies
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  2023 — 2024
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Built AI-powered applications using OpenAI integrations while
+                delivering scalable frontend architectures for healthcare,
+                blockchain and AI-focused products. Designed reusable systems,
+                improved performance and collaborated across multiple engineering teams.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">OpenAI</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Healthcare</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Blockchain</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Architecture</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- TECHNOWIS -->
+          <div class="reveal d5 relative pl-14 pb-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-zinc-300 dark:bg-zinc-700 border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Junior Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    Technowis
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  2022 — 2023
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Developed blockchain ecosystems, NFT marketplaces and fintech
+                products while focusing on frontend performance, scalability,
+                modern architecture patterns and user experience.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Blockchain</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">NFT</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Web3</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">React</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- THE TRADE NETWORK -->
+          <div class="reveal d6 relative pl-14">
+
+            <div
+              class="absolute left-0 top-1 w-8 h-8 rounded-full bg-zinc-300 dark:bg-zinc-700 border-4 border-white dark:border-zinc-950">
+            </div>
+
+            <div class="bg-white dark:bg-zinc-900 rounded-2xl p-7 border border-zinc-100 dark:border-zinc-800">
+
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+                <div>
+                  <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">
+                    Junior Software Engineer
+                  </h3>
+
+                  <p class="text-accent text-sm font-medium">
+                    The Trade Network
+                  </p>
+                </div>
+
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                  2021 — 2022
+                </span>
+
+              </div>
+
+              <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                Started my professional software engineering journey by building
+                a marketplace platform for heavy-duty trucks and parts, delivering
+                search, inventory management, listings and transactional workflows.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">JavaScript</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Node.js</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Marketplace</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">Full Stack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ACHIEVEMENTS & CERTIFICATIONS ═══ -->
+    <section id="achievements" class="py-24">
+
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="mb-14">
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+            Milestones
+          </p>
+
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+            Achievements & Certifications
+          </h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+          <!-- Achievements -->
+          <div class="reveal d1 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-3xl p-8">
+
+            <h3 class="font-display font-bold text-2xl mb-8 text-zinc-900 dark:text-white">
+              Key Achievements
+            </h3>
+
+            <div class="space-y-5">
+
+              <div class="flex items-start gap-4">
+                <div class="text-accent text-xl">✓</div>
+                <p class="text-zinc-500 dark:text-zinc-400">
+                  Led a team of 10+ engineers across enterprise applications.
+                </p>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="text-accent text-xl">✓</div>
+                <p class="text-zinc-500 dark:text-zinc-400">
+                  Delivered 30+ web applications across LMS, CMS, HRM and E-commerce domains.
+                </p>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="text-accent text-xl">✓</div>
+                <p class="text-zinc-500 dark:text-zinc-400">
+                  Designed and implemented scalable Micro Frontend Architecture.
+                </p>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="text-accent text-xl">✓</div>
+                <p class="text-zinc-500 dark:text-zinc-400">
+                  Mentored junior and mid-level developers on React and TypeScript.
+                </p>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="text-accent text-xl">✓</div>
+                <p class="text-zinc-500 dark:text-zinc-400">
+                  Built enterprise-grade educational platforms serving thousands of users.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Certifications -->
+          <div class="reveal d2 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-3xl p-8">
+
+            <h3 class="font-display font-bold text-2xl mb-8 text-zinc-900 dark:text-white">
+              Certifications
+            </h3>
+
+            <div class="space-y-6">
+
+              <!-- Certification Item -->
+              <div class="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
+
+                <h4 class="font-semibold text-zinc-900 dark:text-white mb-1">
+                  HCNA (Huawei Certified Network Associate)
+                </h4>
+
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  CISCO CORVIT
+                </p>
+
+              </div>
+
+              <div class="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
+
+                <h4 class="font-semibold text-zinc-900 dark:text-white mb-1">
+                  FICS (Finding Innovative & Creative Solutions for Society) Winner
+                </h4>
+
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  NUST
+                </p>
+
+              </div>
+
+              <div class="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
+
+                <h4 class="font-semibold text-zinc-900 dark:text-white mb-1">
+                  FYP (Final Year Project) Gold Medalist
+                </h4>
+
+                <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  NUST
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="py-24">
+
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+
+          <!-- Background Glow -->
+          <div class="absolute top-0 right-0 w-72 h-72 bg-accent/20 rounded-full blur-3xl pointer-events-none">
+          </div>
+
+          <div class="absolute bottom-0 left-0 w-60 h-60 bg-accent/10 rounded-full blur-3xl pointer-events-none">
+          </div>
+
+          <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+
+            <!-- LEFT CONTENT -->
+
+            <div>
+
+              <p class="reveal text-xs font-medium text-accent tracking-[0.25em] uppercase mb-4">
+                Let's Connect
+              </p>
+
+              <h2
+                class="reveal d1 font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+
+                Let's Build
+                <br>
+
+                Something Amazing
+
+              </h2>
+
+              <p class="reveal d2 text-zinc-400 text-lg leading-relaxed max-w-xl mb-10">
+
+                I'm a Senior Software Engineer passionate about building scalable
+                web applications, enterprise SaaS products and AI-powered
+                platforms.
+
+                Whether you're looking for a frontend specialist, full-stack
+                engineer or technical leader, I'd love to discuss how I can help
+                bring your next product to life.
+
+              </p>
+
+              <!-- Availability -->
+
+              <div
+                class="reveal d3 inline-flex items-center gap-3 bg-zinc-800 border border-zinc-700 rounded-full px-5 py-3">
+
+                <span class="w-3 h-3 rounded-full bg-green-500 animate-pulse">
+                </span>
+
+                <span class="text-sm text-zinc-300">
+
+                  Available for Full-time • Remote • Freelance
+
+                </span>
+
+              </div>
+
+              <!-- Quick Stats -->
+
+              <div class="reveal d3 grid grid-cols-3 gap-8 mt-12">
+
+                <div>
+
+                  <h3 class="text-3xl font-display font-bold text-white">
+                    5+
+                  </h3>
+
+                  <p class="text-zinc-500 text-sm mt-2">
+                    Years Experience
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 class="text-3xl font-display font-bold text-white">
+                    20+
+                  </h3>
+
+                  <p class="text-zinc-500 text-sm mt-2">
+                    Enterprise Projects
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 class="text-3xl font-display font-bold text-white">
+                    10+
+                  </h3>
+
+                  <p class="text-zinc-500 text-sm mt-2">
+                    Engineers Led
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="reveal d2">
+
+              <div class="grid gap-5">
+                <!-- EMAIL -->
+
+                <a href="mailto:zohaibkhalid2198@gmail.com"
+                  class="group rounded-2xl border border-zinc-700 bg-zinc-800/60 hover:bg-zinc-800 hover:border-accent transition-all duration-300 p-6">
+
+                  <div class="flex items-center justify-between">
+
+                    <div>
+
+                      <p class="text-xs uppercase tracking-[0.25em] text-accent mb-2">
+                        Email
+                      </p>
+
+                      <h3 class="text-white font-semibold text-xl">
+                        zohaibkhalid2198@gmail.com
+                      </h3>
+
+                      <p class="text-zinc-400 text-sm mt-2">
+                        For job opportunities, freelance work and collaborations.
+                      </p>
+
+                    </div>
+
+                    <div
+                      class="w-12 h-12 rounded-xl bg-accent/10 group-hover:bg-accent flex items-center justify-center transition-all">
+
+                      <svg class="w-5 h-5 text-accent group-hover:text-white" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+
+                      </svg>
+
+                    </div>
+
+                  </div>
+
+                </a>
+
+                <!-- LINKEDIN -->
+
+                <a href="https://www.linkedin.com/in/zohaib-khalid2198/" target="_blank" rel="noopener noreferrer"
+                  class="group rounded-2xl border border-zinc-700 bg-zinc-800/60 hover:bg-zinc-800 hover:border-accent transition-all duration-300 p-6">
+
+                  <div class="flex items-center justify-between">
+
+                    <div>
+
+                      <p class="text-xs uppercase tracking-[0.25em] text-accent mb-2">
+                        LinkedIn
+                      </p>
+
+                      <h3 class="text-white font-semibold text-xl">
+                        Connect Professionally
+                      </h3>
+
+                      <p class="text-zinc-400 text-sm mt-2">
+                        Let's discuss engineering, architecture and opportunities.
+                      </p>
+
+                    </div>
+
+                    <div
+                      class="w-12 h-12 rounded-xl bg-accent/10 group-hover:bg-accent flex items-center justify-center transition-all">
+
+                      <svg class="w-5 h-5 text-accent group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+
+                        <path
+                          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+
+                      </svg>
+
+                    </div>
+
+                  </div>
+
+                </a>
+
+                <!-- GITHUB -->
+
+                <a href="https://github.com/ZohaibZK" target="_blank" rel="noopener noreferrer"
+                  class="group rounded-2xl border border-zinc-700 bg-zinc-800/60 hover:bg-zinc-800 hover:border-accent transition-all duration-300 p-6">
+
+                  <div class="flex items-center justify-between">
+
+                    <div>
+
+                      <p class="text-xs uppercase tracking-[0.25em] text-accent mb-2">
+                        GitHub
+                      </p>
+
+                      <h3 class="text-white font-semibold text-xl">
+                        Explore My Code
+                      </h3>
+
+                      <p class="text-zinc-400 text-sm mt-2">
+                        Enterprise applications, open-source projects and experiments.
+                      </p>
+
+                    </div>
+
+                    <div
+                      class="w-12 h-12 rounded-xl bg-accent/10 group-hover:bg-accent flex items-center justify-center transition-all">
+
+                      <svg class="w-5 h-5 text-accent group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+
+                        <path
+                          d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.304-5.467-1.334-5.467-5.93 0-1.312.469-2.382 1.236-3.222-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.8c1.02.005 2.047.138 3.006.404 2.292-1.552 3.3-1.23 3.3-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.798 24 17.301 24 12 24 5.37 18.627 0 12 0z" />
+
+                      </svg>
+
+                    </div>
+
+                  </div>
+
+                </a>
+
+                <!-- RESUME -->
+
+                <a href="./Resume_Zohaib_Khalid_SE.pdf" target="_blank"
+                  class="group rounded-2xl bg-accent transition-all duration-300 p-6">
+
+                  <div class="flex items-center justify-between">
+
+                    <div>
+
+                      <p class="text-xs uppercase tracking-[0.25em] text-white/70 mb-2">
+                        Resume
+                      </p>
+
+                      <h3 class="text-white font-semibold text-xl">
+                        Download My CV
+                      </h3>
+
+                      <p class="text-white/80 text-sm mt-2">
+                        Experience, projects, leadership and technical expertise.
+                      </p>
+
+                    </div>
+
+                    <div
+                      class="w-12 h-12 rounded-xl bg-white/10 group-hover:bg-white/20 flex items-center justify-center transition-all">
+
+                      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5" />
+
+                      </svg>
+
+                    </div>
+
+                  </div>
+
+                </a>
+                <!-- Bottom CTA -->
+
+                <div
+                  class="mt-6 rounded-2xl border border-zinc-700 bg-zinc-800/40 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                  <div>
+
+                    <p class="text-white font-medium">
+                      Looking for a Senior Software Engineer?
+                    </p>
+
+                    <p class="text-sm text-zinc-400 mt-1">
+                      I usually respond within <span class="text-accent font-medium">24 hours</span>.
+                      Open to remote opportunities, freelance projects and long-term collaborations.
+                    </p>
+
+                  </div>
+
+                  <a href="mailto:zohaibkhalid2198@gmail.com"
+                    class="inline-flex items-center justify-center gap-2 bg-accent transition-colors text-white font-semibold px-6 py-3 rounded-xl whitespace-nowrap">
+
+                    Let's Talk
+
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> Zohaib Khalid. All rights reserved. <br> Developed by <a
+          href="https://lbegey78.gumroad.com/" target="_blank" class="font-bold">Laurent Begey</a> • Distributed by <a
+          href="https://themewagon.com/" target="_blank" class="font-bold">ThemeWagon</a></p>
+      <p class="text-xs text-zinc-500">Built with
+        <a href="https://tailwindcss.com" rel="noopener noreferrer" target="_blank"
+          class="hover:text-accent transition-colors">Tailwind CSS</a>
+        &amp;
+        <a href="https://alpinejs.dev" rel="noopener noreferrer" target="_blank"
+          class="hover:text-accent transition-colors">Alpine.js</a>
+      </p>
+    </div>
+  </footer> -->
+
+  <script>
+    function app() {
+      return {
+        dark: false,
+        mm: false,
+        sc: false,
+        s: 'hero',
+
+        init() {
+          // dark mode
+          this.dark = localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          this.$watch('dark', v => localStorage.setItem('theme', v ? 'dark' : 'light'));
+
+          // scroll
+          window.addEventListener('scroll', () => {
+            this.sc = window.scrollY > 20;
+            this.updateSection();
+          }, { passive: true });
+
+          // reveal
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+          document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+          // year
+          document.getElementById('yr').textContent = new Date().getFullYear();
+        },
+
+        updateSection() {
+          const atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 60;
+          if (atBottom) { this.s = 'contact'; return; }
+          const ids = ['contact', 'achievements', 'experience', 'about', 'work', 'expertise', 'hero'];
+          for (const id of ids) {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= el.offsetTop - 130) { this.s = id; return; }
+          }
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>
